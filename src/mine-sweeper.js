@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+// const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * In the popular Minesweeper game you have a board with some mines and those cells
@@ -23,11 +23,61 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+    console.log(matrix)
+    const arr = Array(matrix.length).fill(Array(matrix[0].length).fill(0));
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] === true) {
+                if (i - 1 >= 0) {
+                    console.log(i, j)
+                    arr[i - 1][j] += 1;
+                }
+                if (i + 1 < matrix.length) {
+                    console.log(i, j)
+                    console.log(i + 1, j);
+                    arr[i + 1][j]++;
+                }
+                if (j + 1 < matrix[i].length) {
+                    console.log(i, j)
+                    console.log(i, j + 1);
+                    arr[i][j + 1]++;
+                }
+                if (j - 1 >= 0) {
+                    console.log(i, j)
+                    arr[i][j - 1] += 1;
+                }
+                if (i - 1 >= 0 && j - 1 >= 0) {
+                    console.log(i, j)
+                    arr[i - 1][j - 1] += 1;
+                }
+                if (i + 1 < matrix.length && j + 1 < matrix[i].length) {
+                    console.log(i, j)
+                    console.log(i + 1, j + 1);
+                    arr[i + 1][j + 1]++;
+                }
+                if (i + 1 < matrix.length && j - 1 >= 0) {
+                    arr[i + 1][j - 1] += 1;
+                }
+                if (i - 1 >= 0 && j + 1 < matrix[i].length) {
+                    arr[i - 1][j + 1] += 1;
+                }
+            }
+            console.log(arr)
+            return arr;
+        }
+        break;
+    }
+    return arr
 }
 
-module.exports = {
-  minesweeper
-};
+const res = minesweeper([
+    [true, false],
+    [false, true],
+]);
+
+console.log(res)
+
+// module.exports = {
+//   minesweeper
+// };
